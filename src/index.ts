@@ -5,7 +5,7 @@ import compression from "compression";
 import cors from "cors";
 import { connectDB } from "./db";
 import { config } from "./config";
-//import routes from "./routes/index";
+import routes from "./routes/index";
 
 connectDB();
 
@@ -23,7 +23,7 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-//app.use("/", routes);
+app.use("/", routes);
 
 app.listen(config.PORT, () => {
 	console.log(`server running on http://localhost:${config.PORT}`);
