@@ -68,6 +68,7 @@ class UserController {
 			"Membership Type": membershipType,
 			Email: email,
 			"Phone Number": phone,
+			"Created At": new Date(`${userSaved.createdAt}`).toUTCString(),
 		});
 
 		return res.status(201).json(userSaved);
