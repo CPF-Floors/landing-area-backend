@@ -16,4 +16,7 @@ export const config = {
 	client_x509_cert_url: process.env.client_x509_cert_url,
 	universe_domain: process.env.universe_domain,
 	SHEET_ID: process.env.SHEET_ID,
+	resend_api: process.env.resend_api,
+	own_email: process.env.own_email,
+	google_sheet_url: process.env.google_sheet_url
 };
