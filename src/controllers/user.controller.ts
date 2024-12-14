@@ -1,9 +1,10 @@
 import type { Request, Response } from "express";
-import UserModel from "../models/user.model";
 import type { User, UserDTO } from "../interfaces/user.model";
+import UserModel from "../models/user.model";
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 import { JWT } from "google-auth-library";
 import { config } from "../config";
+import EmailController from "./emails.controller";
 
 const serviceAccountAuth = new JWT({
 	email: config.client_email,
@@ -70,6 +71,12 @@ class UserController {
 			"Phone Number": phone,
 			"Created At": new Date(`${userSaved.createdAt}`).toUTCString(),
 		});
+
+		const { error } = await EmailController.sendEmail({email})
+
+		if (error) {
+			console.log("Error to send email after create user",error);
+		}
 
 		return res.status(201).json(userSaved);
 	}
