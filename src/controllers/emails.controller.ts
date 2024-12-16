@@ -1,17 +1,17 @@
 import { Resend } from "resend";
-import {config} from "../config"
+import { config } from "../config";
 
-const resend = new Resend(config.resend_api)
-const own_email = config.own_email as string
-const google_sheet_url = config.google_sheet_url
+const resend = new Resend(config.resend_api);
+const own_email = config.own_email as string;
+const google_sheet_url = config.google_sheet_url;
 
 class EmailController {
-     async sendEmail({email}: {email: string}) {
-          const {error} = await resend.emails.send({
-               to: [own_email],
-               from: `no-reply ${own_email}`,
-               subject: "A new person has been added to the database. ",
-               html: `
+	async sendEmail({ email }: { email: string }) {
+		const { error } = await resend.emails.send({
+			to: [own_email],
+			from: `${own_email}`,
+			subject: "A new person has been added to the database. ",
+			html: `
         <!DOCTYPE html>
         <html>
             <head>
@@ -207,11 +207,10 @@ class EmailController {
             </body>
         </html>
         `,
-          })
+		});
 
-          return {error}
-
-     }
+		return { error };
+	}
 }
 
 export default new EmailController();
